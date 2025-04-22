@@ -1,7 +1,10 @@
+
 import React from 'react';
 import Section from './Section';
-import Card from './Card';
+import { Card } from './ui/card';
 import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 interface Skill {
   name: string;
@@ -20,42 +23,69 @@ const skills: Skill[] = [
   { name: 'Express', category: 'framework', level: 4, color: 'jungle-violet' },
   { name: 'Django', category: 'framework', level: 3, color: 'jungle-emerald' },
   { name: 'MongoDB', category: 'tool', level: 4, color: 'jungle-emerald' },
-  { name: 'SQL', category: 'language', level: 3, color: 'jungle-cyan' },
   { name: 'Git', category: 'tool', level: 4, color: 'jungle-violet' },
   { name: 'Docker', category: 'tool', level: 3, color: 'jungle-cyan' },
   { name: 'Cyber Security', category: 'concept', level: 4, color: 'jungle-emerald' },
   { name: 'Networking', category: 'concept', level: 3, color: 'jungle-violet' },
-  { name: 'API Design', category: 'concept', level: 4, color: 'jungle-cyan' },
+  { name: 'API Design', category: 'concept', level: 4, color: 'jungle-cyan' }
 ];
 
 const SkillsSection = () => {
+  const categories = ['language', 'framework', 'tool', 'concept'] as const;
+
   return (
     <Section
       id="skills"
       title="Skills"
       subtitle="Technologies and concepts I've mastered"
     >
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {skills.map((skill, index) => (
-          <Card 
-            key={index}
-            className={`text-center transform transition-all duration-500 hover:shadow-[0_0_20px_var(--shadow-color)] backdrop-blur-lg bg-black/40`}
-            style={{ '--shadow-color': `var(--${skill.color})` } as React.CSSProperties}
-            neonBorder={false}
-          >
-            <h3 className={`text-lg font-semibold mb-4 text-${skill.color}`}>
-              {skill.name}
+      <div className="space-y-8">
+        {categories.map((category) => (
+          <div key={category} className="space-y-4">
+            <h3 className="text-2xl font-bold capitalize neon-text">
+              {category}s
             </h3>
-            
-            <Progress 
-              value={skill.level * 20} 
-              className="h-1.5 bg-white/10"
-            />
-            
-            <div className="mt-3 text-xs text-white/50 uppercase">
-              {skill.category}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {skills
+                .filter((skill) => skill.category === category)
+                .map((skill, index) => (
+                  <Card 
+                    key={index}
+                    className={cn(
+                      "relative overflow-hidden backdrop-blur-lg bg-black/40",
+                      "transform transition-all duration-500",
+                      "hover:shadow-[0_0_30px_var(--shadow-color)]",
+                      "before:absolute before:inset-0",
+                      "before:bg-gradient-to-br before:from-white/10 before:to-transparent",
+                      "before:opacity-0 hover:before:opacity-100",
+                      "before:transition-opacity before:duration-500"
+                    )}
+                    style={{ '--shadow-color': `var(--${skill.color})` } as React.CSSProperties}
+                  >
+                    <div className="p-6 relative z-10">
+                      <div className="flex items-center justify-between mb-4">
+                        <h4 className={`text-lg font-semibold text-${skill.color}`}>
+                          {skill.name}
+                        </h4>
+                        <Badge 
+                          variant="outline" 
+                          className={`bg-${skill.color}/10 text-${skill.color} border-${skill.color}/30`}
+                        >
+                          Level {skill.level}
+                        </Badge>
+                      </div>
+                      <Progress 
+                        value={skill.level * 20} 
+                        className={cn(
+                          "h-2 rounded-full bg-white/5",
+                          `[&>div]:bg-${skill.color}`
+                        )}
+                      />
+                    </div>
+                  </Card>
+                ))}
             </div>
-          </Card>
+          </div>
         ))}
       </div>
     </Section>

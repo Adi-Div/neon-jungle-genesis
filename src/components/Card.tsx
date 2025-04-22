@@ -20,11 +20,24 @@ const Card = ({
   return (
     <div 
       className={cn(
-        "relative overflow-hidden rounded-lg p-6",
-        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/5 before:to-transparent before:opacity-0 before:transition-opacity",
-        "after:absolute after:inset-0 after:-z-10 after:bg-black/30 after:backdrop-blur-xl",
-        hoverEffect && "transition-all duration-500 hover:scale-105 hover:before:opacity-100",
-        neonBorder && "neon-border",
+        "relative overflow-hidden rounded-lg",
+        "bg-black/30 backdrop-blur-xl",
+        "border border-white/10",
+        hoverEffect && [
+          "transition-all duration-500",
+          "hover:scale-105",
+          "before:absolute before:inset-0",
+          "before:bg-gradient-to-br before:from-white/10 before:to-transparent",
+          "before:opacity-0 hover:before:opacity-100",
+          "before:transition-opacity before:duration-500"
+        ],
+        neonBorder && [
+          "after:absolute after:inset-[-1px]",
+          "after:rounded-lg after:-z-10",
+          "after:bg-gradient-to-br",
+          "after:from-jungle-cyan after:via-jungle-violet after:to-jungle-emerald",
+          "after:animate-pulse-slow"
+        ],
         className
       )}
       style={style}
