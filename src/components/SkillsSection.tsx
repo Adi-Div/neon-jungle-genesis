@@ -1,10 +1,20 @@
 
 import React from 'react';
 import Section from './Section';
-import { Card } from './ui/card';
+import Card from './Card';
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { 
+  Code, 
+  Database, 
+  Laptop, 
+  LayoutGrid, 
+  PenTool, 
+  Server, 
+  Terminal, 
+  Wrench 
+} from 'lucide-react';
 
 interface Skill {
   name: string;
@@ -14,21 +24,53 @@ interface Skill {
 }
 
 const skills: Skill[] = [
+  // Languages
   { name: 'Python', category: 'language', level: 5, color: 'jungle-cyan' },
   { name: 'JavaScript', category: 'language', level: 5, color: 'jungle-violet' },
   { name: 'TypeScript', category: 'language', level: 4, color: 'jungle-cyan' },
   { name: 'HTML/CSS', category: 'language', level: 5, color: 'jungle-emerald' },
+  { name: 'Java', category: 'language', level: 4, color: 'jungle-violet' },
+  { name: 'C/C++', category: 'language', level: 3, color: 'jungle-cyan' },
+  
+  // Frameworks
   { name: 'React', category: 'framework', level: 5, color: 'jungle-cyan' },
   { name: 'Node.js', category: 'framework', level: 4, color: 'jungle-emerald' },
   { name: 'Express', category: 'framework', level: 4, color: 'jungle-violet' },
   { name: 'Django', category: 'framework', level: 3, color: 'jungle-emerald' },
-  { name: 'MongoDB', category: 'tool', level: 4, color: 'jungle-emerald' },
+  { name: 'Angular', category: 'framework', level: 3, color: 'jungle-cyan' },
+  { name: 'Flask', category: 'framework', level: 3, color: 'jungle-violet' },
+  
+  // Tools
   { name: 'Git', category: 'tool', level: 4, color: 'jungle-violet' },
   { name: 'Docker', category: 'tool', level: 3, color: 'jungle-cyan' },
+  { name: 'Firebase', category: 'tool', level: 4, color: 'jungle-emerald' },
+  { name: 'MongoDB', category: 'tool', level: 4, color: 'jungle-emerald' },
+  { name: 'Figma', category: 'tool', level: 4, color: 'jungle-cyan' },
+  { name: 'VS Code', category: 'tool', level: 5, color: 'jungle-violet' },
+  
+  // Concepts
   { name: 'Cyber Security', category: 'concept', level: 4, color: 'jungle-emerald' },
   { name: 'Networking', category: 'concept', level: 3, color: 'jungle-violet' },
-  { name: 'API Design', category: 'concept', level: 4, color: 'jungle-cyan' }
+  { name: 'API Design', category: 'concept', level: 4, color: 'jungle-cyan' },
+  { name: 'UI/UX', category: 'concept', level: 5, color: 'jungle-emerald' },
+  { name: 'Agile', category: 'concept', level: 3, color: 'jungle-violet' },
+  { name: 'JWT', category: 'concept', level: 4, color: 'jungle-cyan' }
 ];
+
+const getCategoryIcon = (category: string) => {
+  switch(category) {
+    case 'language':
+      return <Code className="h-6 w-6 text-jungle-cyan" />;
+    case 'framework':
+      return <LayoutGrid className="h-6 w-6 text-jungle-violet" />;
+    case 'tool':
+      return <Wrench className="h-6 w-6 text-jungle-emerald" />;
+    case 'concept':
+      return <PenTool className="h-6 w-6 text-jungle-cyan" />;
+    default:
+      return <Terminal className="h-6 w-6" />;
+  }
+};
 
 const SkillsSection = () => {
   const categories = ['language', 'framework', 'tool', 'concept'] as const;
@@ -36,30 +78,29 @@ const SkillsSection = () => {
   return (
     <Section
       id="skills"
-      title="Skills"
+      title="Technical Arsenal"
       subtitle="Technologies and concepts I've mastered"
+      className="bg-gradient-radial from-[#0D1B3E]/30 to-black"
     >
-      <div className="space-y-8">
+      <div className="space-y-16">
         {categories.map((category) => (
-          <div key={category} className="space-y-4">
-            <h3 className="text-2xl font-bold capitalize neon-text">
-              {category}s
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div key={category} className="space-y-6">
+            <div className="flex items-center space-x-3">
+              {getCategoryIcon(category)}
+              <h3 className="text-2xl font-bold capitalize bg-gradient-to-r from-[#00C4E6] via-[#8B00FF] to-[#00B7A8] bg-clip-text text-transparent animate-text-shimmer bg-[length:200%_auto]">
+                {category}s
+              </h3>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {skills
                 .filter((skill) => skill.category === category)
                 .map((skill, index) => (
                   <Card 
                     key={index}
-                    className={cn(
-                      "relative overflow-hidden backdrop-blur-lg bg-black/40",
-                      "transform transition-all duration-500",
-                      "hover:shadow-[0_0_30px_var(--shadow-color)]",
-                      "before:absolute before:inset-0",
-                      "before:bg-gradient-to-br before:from-white/10 before:to-transparent",
-                      "before:opacity-0 hover:before:opacity-100",
-                      "before:transition-opacity before:duration-500"
-                    )}
+                    className="transform transition-all duration-500 backdrop-blur-xl bg-black/40 border border-white/5 hover:border-white/20"
+                    glowColor={skill.color === 'jungle-cyan' ? 'cyan' : skill.color === 'jungle-violet' ? 'violet' : 'teal'}
+                    hoverEffect={true}
                     style={{ '--shadow-color': `var(--${skill.color})` } as React.CSSProperties}
                   >
                     <div className="p-6 relative z-10">
@@ -69,7 +110,12 @@ const SkillsSection = () => {
                         </h4>
                         <Badge 
                           variant="outline" 
-                          className={`bg-${skill.color}/10 text-${skill.color} border-${skill.color}/30`}
+                          className={cn(
+                            "bg-black/60 backdrop-blur-sm",
+                            skill.color === 'jungle-cyan' && "border-[#00C4E6]/30 text-[#00C4E6]",
+                            skill.color === 'jungle-violet' && "border-[#8B00FF]/30 text-[#8B00FF]",
+                            skill.color === 'jungle-emerald' && "border-[#00B7A8]/30 text-[#00B7A8]"
+                          )}
                         >
                           Level {skill.level}
                         </Badge>
@@ -78,7 +124,9 @@ const SkillsSection = () => {
                         value={skill.level * 20} 
                         className={cn(
                           "h-2 rounded-full bg-white/5",
-                          `[&>div]:bg-${skill.color}`
+                          skill.color === 'jungle-cyan' && "[&>div]:bg-[#00C4E6]",
+                          skill.color === 'jungle-violet' && "[&>div]:bg-[#8B00FF]",
+                          skill.color === 'jungle-emerald' && "[&>div]:bg-[#00B7A8]"
                         )}
                       />
                     </div>
