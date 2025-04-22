@@ -7,13 +7,15 @@ interface CardProps {
   children: React.ReactNode;
   neonBorder?: boolean;
   hoverEffect?: boolean;
+  style?: React.CSSProperties;
 }
 
 const Card = ({ 
   className, 
   children, 
   neonBorder = false,
-  hoverEffect = true
+  hoverEffect = true,
+  style
 }: CardProps) => {
   return (
     <div 
@@ -23,6 +25,7 @@ const Card = ({
         neonBorder && "neon-border",
         className
       )}
+      style={style}
     >
       {children}
     </div>
