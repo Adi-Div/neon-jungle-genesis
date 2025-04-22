@@ -1,12 +1,12 @@
-
 import React from 'react';
 import Section from './Section';
 import Card from './Card';
+import { Progress } from "@/components/ui/progress";
 
 interface Skill {
   name: string;
   category: 'language' | 'framework' | 'tool' | 'concept';
-  level: number; // 1-5
+  level: number;
   color: string;
 }
 
@@ -39,24 +39,18 @@ const SkillsSection = () => {
         {skills.map((skill, index) => (
           <Card 
             key={index}
-            className={`text-center transform transition-all duration-500 hover:shadow-[0_0_20px_var(--shadow-color)]`}
+            className={`text-center transform transition-all duration-500 hover:shadow-[0_0_20px_var(--shadow-color)] backdrop-blur-lg bg-black/40`}
             style={{ '--shadow-color': `var(--${skill.color})` } as React.CSSProperties}
             neonBorder={false}
           >
-            <h3 className={`text-lg font-semibold mb-2 text-${skill.color}`}>{skill.name}</h3>
+            <h3 className={`text-lg font-semibold mb-4 text-${skill.color}`}>
+              {skill.name}
+            </h3>
             
-            <div className="flex justify-center space-x-1 mt-2">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <div 
-                  key={i}
-                  className={`h-1.5 w-1.5 rounded-full ${
-                    i < skill.level 
-                      ? `bg-${skill.color}` 
-                      : 'bg-white/20'
-                  }`}
-                ></div>
-              ))}
-            </div>
+            <Progress 
+              value={skill.level * 20} 
+              className="h-1.5 bg-white/10"
+            />
             
             <div className="mt-3 text-xs text-white/50 uppercase">
               {skill.category}
