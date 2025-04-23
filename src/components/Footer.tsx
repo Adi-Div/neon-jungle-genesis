@@ -4,14 +4,14 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="relative py-12 overflow-hidden">
+    <footer className="relative py-8 overflow-hidden">
       {/* Glowing tree root effect */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-40 h-1 bg-gradient-to-r from-transparent via-jungle-emerald to-transparent blur-sm"></div>
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-0.5 bg-gradient-to-r from-transparent via-jungle-cyan to-transparent blur-sm"></div>
       
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-6 md:mb-0">
+          <div className="mb-4 md:mb-0">
             <p className="text-white/50 text-sm">
               © {new Date().getFullYear()} Adidev. All rights reserved.
             </p>

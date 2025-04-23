@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 
 const JungleBackground = () => {
@@ -187,30 +186,25 @@ const JungleBackground = () => {
   
   return (
     <>
-      {/* Fallback video or image if WebM is not supported */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
-        {/* Video Background - will be shown if supported */}
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="jungle-video-bg"
+          className="absolute inset-0 w-full h-full object-cover opacity-30"
         >
           <source src="/jungle-bg.webm" type="video/webm" />
-          {/* Fallback message for browsers that don't support video */}
+          <img src="/jungle-bg.webp" alt="Jungle Background" className="w-full h-full object-cover" />
         </video>
         
-        {/* Canvas animation as fallback or enhancement */}
         <canvas
           ref={canvasRef}
-          className="fixed inset-0 -z-5 w-full h-full opacity-40"
+          className="fixed inset-0 -z-5 w-full h-full opacity-40 pointer-events-none"
         />
         
-        {/* Overlay gradient to blend with the theme */}
-        <div className="absolute inset-0 bg-gradient-to-br from-jungle-cyan/5 via-jungle-violet/5 to-jungle-emerald/5 opacity-20"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-jungle-cyan/10 via-jungle-violet/10 to-jungle-emerald/10 opacity-50"></div>
         
-        {/* Dark overlay to maintain readability */}
         <div className="absolute inset-0 bg-black opacity-70"></div>
       </div>
     </>
