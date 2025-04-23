@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
@@ -8,23 +9,17 @@ import ProjectsSection from '../components/ProjectsSection';
 import StartupSection from '../components/StartupSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
-import ParticleBackground from '../components/ParticleBackground';
-import JungleBackground from '../components/JungleBackground';
+import NatureBackground from '../components/NatureBackground';
 
 const Index = () => {
   useEffect(() => {
-    // Update the document title
     document.title = 'Adidev | Full-Stack Developer & Cyber-Security Specialist';
-    
-    // Smooth scroll for anchor links
     const handleLinkClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a');
-      
       if (anchor && anchor.hash && anchor.hash.startsWith('#')) {
         e.preventDefault();
         const targetElement = document.querySelector(anchor.hash);
-        
         if (targetElement) {
           window.scrollTo({
             top: targetElement.getBoundingClientRect().top + window.scrollY - 100,
@@ -33,20 +28,17 @@ const Index = () => {
         }
       }
     };
-    
     document.addEventListener('click', handleLinkClick);
-    
     return () => {
       document.removeEventListener('click', handleLinkClick);
     };
   }, []);
   
   return (
+    // Outer div has min-h-screen so bg always covers content; remove padding/margin after Footer.
     <div className="relative bg-black min-h-screen flex flex-col">
-      {/* Jungle background with animation */}
-      <JungleBackground />
-      {/* Additional particle effects */}
-      {/* <ParticleBackground /> Removed for simplicity since new BG includes all particles */}
+      {/* New nature/cyberpunk animated background */}
+      <NatureBackground />
       {/* Navbar */}
       <Navbar />
       {/* Main content */}
@@ -59,7 +51,7 @@ const Index = () => {
         <StartupSection />
         <ContactSection />
       </main>
-      {/* Footer */}
+      {/* Footer, no margin-bottom */}
       <Footer />
     </div>
   );
