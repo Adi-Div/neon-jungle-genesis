@@ -4,7 +4,7 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="relative py-8 overflow-hidden">
+    <footer className="relative py-6 overflow-hidden">
       {/* Glowing tree root effect */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-40 h-1 bg-gradient-to-r from-transparent via-jungle-emerald to-transparent blur-sm"></div>
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-0.5 bg-gradient-to-r from-transparent via-jungle-cyan to-transparent blur-sm"></div>

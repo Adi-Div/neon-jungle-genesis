@@ -14,6 +14,8 @@ import NatureBackground from '../components/NatureBackground';
 const Index = () => {
   useEffect(() => {
     document.title = 'Adidev | Full-Stack Developer & Cyber-Security Specialist';
+    
+    // Smooth scroll function
     const handleLinkClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a');
@@ -28,21 +30,25 @@ const Index = () => {
         }
       }
     };
+    
     document.addEventListener('click', handleLinkClick);
+    
+    // Cleanup
     return () => {
       document.removeEventListener('click', handleLinkClick);
     };
   }, []);
   
   return (
-    // Outer div has min-h-screen so bg always covers content; remove padding/margin after Footer.
-    <div className="relative bg-black min-h-screen flex flex-col">
-      {/* New nature/cyberpunk animated background */}
+    <div className="relative bg-black min-h-screen w-full">
+      {/* Background */}
       <NatureBackground />
+      
       {/* Navbar */}
       <Navbar />
-      {/* Main content */}
-      <main className="relative z-10 flex-1">
+      
+      {/* Main content - NO flex-col to avoid layout issues */}
+      <main className="relative z-10">
         <HeroSection />
         <AboutSection />
         <ExperienceSection />
@@ -51,9 +57,11 @@ const Index = () => {
         <StartupSection />
         <ContactSection />
       </main>
-      {/* Footer, no margin-bottom */}
+      
+      {/* Footer */}
       <Footer />
     </div>
   );
 };
+
 export default Index;

@@ -50,7 +50,7 @@ const Section = ({ id, className, children, title, subtitle }: SectionProps) => 
       id={id}
       ref={sectionRef}
       className={cn(
-        'py-20 md:py-40 min-h-screen flex flex-col justify-center relative',
+        'py-20 md:py-32 min-h-screen relative', // Changed from flex to relative positioning
         className
       )}
     >
@@ -99,7 +99,7 @@ const Section = ({ id, className, children, title, subtitle }: SectionProps) => 
         style={{ "--index": "2" } as React.CSSProperties}
       ></div>
 
-      <div className="container mx-auto px-6 md:px-8 z-10">
+      <div className="container mx-auto px-6 md:px-8 z-10 relative">
         {(title || subtitle) && (
           <div className={cn(
             "mb-16 transform transition-all duration-1000 ease-out",
