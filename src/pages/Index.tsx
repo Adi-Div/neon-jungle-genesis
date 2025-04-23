@@ -10,6 +10,7 @@ import StartupSection from '../components/StartupSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 import ParticleBackground from '../components/ParticleBackground';
+import JungleBackground from '../components/JungleBackground';
 
 const Index = () => {
   useEffect(() => {
@@ -43,14 +44,17 @@ const Index = () => {
   
   return (
     <div className="relative bg-jungle-dark min-h-screen">
-      {/* Particle background */}
+      {/* Jungle background with animation */}
+      <JungleBackground />
+      
+      {/* Additional particle effects */}
       <ParticleBackground />
       
       {/* Navbar */}
       <Navbar />
       
       {/* Main content */}
-      <main>
+      <main className="relative z-10">
         <HeroSection />
         <AboutSection />
         <ExperienceSection />

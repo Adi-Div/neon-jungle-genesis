@@ -51,8 +51,8 @@ const Card = ({
   return (
     <div 
       className={cn(
-        "relative overflow-hidden rounded-lg p-6 transition-all duration-300",
-        glassmorphism ? "backdrop-blur-xl bg-black/40 border border-white/10" : "bg-black/60",
+        "relative overflow-hidden rounded-lg transition-all duration-300",
+        glassmorphism ? "backdrop-blur-xl bg-black/50 border border-white/10" : "bg-black/60",
         hoverEffect && [
           "transition-all duration-500",
           "hover:scale-[1.02]",
@@ -61,9 +61,9 @@ const Card = ({
           "before:opacity-0 hover:before:opacity-100",
           "before:transition-opacity before:duration-500"
         ],
-        tilt && "transform perspective-1000 hover:rotate-y-2 hover:rotate-x-1 transition-transform duration-300",
+        tilt && "transform perspective-1000 hover:rotate-y-7 hover:rotate-x-3 transition-transform duration-300",
         neonBorder && [
-          "after:absolute after:inset-[-2px]",
+          "after:absolute after:inset-[-3px]",
           "after:rounded-lg after:-z-10",
           "after:bg-gradient-to-br",
           `after:from-[${selectedGlowColor}] after:via-transparent after:to-[${secondaryGlow}]`,
@@ -73,7 +73,7 @@ const Card = ({
       )}
       style={{
         ...style,
-        boxShadow: `0 0 ${isHovered ? '20px' : '10px'} 0 ${selectedGlowColor}${isHovered ? '60' : '30'}`
+        boxShadow: `0 0 ${isHovered ? '25px' : '15px'} 0 ${selectedGlowColor}${isHovered ? '80' : '40'}`
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -81,13 +81,20 @@ const Card = ({
       {/* Particle Effect (visible on hover) */}
       {particles && isHovered && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[...Array(20)].map((_, i) => (
+          {[...Array(30)].map((_, i) => (
             <div 
               key={i}
-              className="absolute w-1 h-1 rounded-full bg-cyan-400/80 animate-particle"
+              className="absolute rounded-full bg-cyan-400/80 animate-particle"
               style={{
+                width: `${1 + Math.random() * 2}px`,
+                height: `${1 + Math.random() * 2}px`,
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
+                backgroundColor: i % 3 === 0 
+                  ? '#00C4E6' // cyan
+                  : i % 3 === 1 
+                    ? '#8B00FF' // violet
+                    : '#00B7A8', // teal
                 animationDelay: `${Math.random() * 2}s`,
                 animationDuration: `${1 + Math.random() * 2}s`
               }}
@@ -100,7 +107,7 @@ const Card = ({
       <div 
         className={cn(
           "absolute inset-0 bg-gradient-to-tr from-[#00C4E6]/5 via-[#8B00FF]/5 to-[#00B7A8]/5 opacity-0 transition-opacity duration-300 pointer-events-none",
-          isHovered && "opacity-20"
+          isHovered && "opacity-30"
         )}
       />
       

@@ -50,7 +50,7 @@ const Section = ({ id, className, children, title, subtitle }: SectionProps) => 
       id={id}
       ref={sectionRef}
       className={cn(
-        'py-16 md:py-32 min-h-screen flex flex-col justify-center relative',
+        'py-20 md:py-40 min-h-screen flex flex-col justify-center relative',
         className
       )}
     >
@@ -65,11 +65,13 @@ const Section = ({ id, className, children, title, subtitle }: SectionProps) => 
         style={{ transform: `translateY(${scrollY * 0.1}px)` }}
       >
         {/* Firefly particles */}
-        {[...Array(50)].map((_, i) => (
+        {[...Array(30)].map((_, i) => (
           <div 
             key={i}
-            className="absolute w-1.5 h-1.5 rounded-full bg-jungle-cyan/50 animate-floating"
+            className="absolute rounded-full bg-jungle-cyan/50 animate-floating"
             style={{
+              width: `${1 + Math.random() * 3}px`,
+              height: `${1 + Math.random() * 3}px`,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 5}s`,
