@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
@@ -43,18 +42,15 @@ const Index = () => {
   }, []);
   
   return (
-    <div className="relative bg-jungle-dark min-h-screen">
+    <div className="relative bg-black min-h-screen flex flex-col">
       {/* Jungle background with animation */}
       <JungleBackground />
-      
       {/* Additional particle effects */}
-      <ParticleBackground />
-      
+      {/* <ParticleBackground /> Removed for simplicity since new BG includes all particles */}
       {/* Navbar */}
       <Navbar />
-      
       {/* Main content */}
-      <main className="relative z-10">
+      <main className="relative z-10 flex-1">
         <HeroSection />
         <AboutSection />
         <ExperienceSection />
@@ -63,11 +59,9 @@ const Index = () => {
         <StartupSection />
         <ContactSection />
       </main>
-      
       {/* Footer */}
       <Footer />
     </div>
   );
 };
-
 export default Index;
