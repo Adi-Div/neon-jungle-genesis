@@ -102,8 +102,10 @@ const ProjectsSection = () => {
                   glowColor={project.color}
                   tilt={true}
                   hoverEffect={true}
+                  pulseGlow={true}
+                  particles={true}
                 >
-                  <div className="p-6 flex flex-col h-full">
+                  <div className="flex flex-col h-full">
                     <div className="flex justify-between items-start mb-3">
                       <h3 className="text-xl font-bold font-orbitron tracking-wide bg-gradient-to-r from-[#00C4E6] via-[#8B00FF] to-[#00B7A8] bg-clip-text text-transparent">{project.title}</h3>
                       {getStatusBadge(project.status, project.color)}

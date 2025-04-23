@@ -86,7 +86,7 @@
 
 @layer components {
   .glass-card {
-    @apply bg-black/30 backdrop-blur-md border border-white/10 shadow-lg;
+    @apply bg-black/40 backdrop-blur-xl border border-white/10 shadow-lg;
   }
 
   .neon-border {
@@ -96,7 +96,7 @@
   .neon-border::before {
     @apply content-[''] absolute top-0 left-0 w-full h-full -z-10 rounded-lg;
     background: linear-gradient(125deg, rgba(0,196,230,0.8) 15%, rgba(139,0,255,0.8) 50%, rgba(0,183,168,0.8) 85%);
-    margin: -1px;
+    margin: -2px;
     filter: blur(8px);
   }
 
@@ -131,5 +131,77 @@
 
   .btn-hover:hover::after {
     @apply w-[300%] h-[300%];
+  }
+}
+
+/* Animation for particles */
+@keyframes particle {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px 0 rgba(0, 196, 230, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px 5px rgba(139, 0, 255, 0.6);
+  }
+}
+
+@layer utilities {
+  .animate-particle {
+    animation: particle 2s ease-in infinite;
+  }
+  
+  .animate-floating {
+    animation: floating 6s ease-in-out infinite;
+  }
+  
+  .animate-glow-pulse {
+    animation: glow-pulse 3s infinite;
+  }
+  
+  /* Glassmorphism with stronger blur */
+  .glassmorphism-strong {
+    @apply backdrop-blur-xl bg-black/40 border border-white/10;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  /* Holographic overlay */
+  .holographic-overlay {
+    background: linear-gradient(45deg, 
+      rgba(0, 196, 230, 0.05) 0%, 
+      rgba(139, 0, 255, 0.05) 25%, 
+      rgba(0, 183, 168, 0.05) 50%, 
+      rgba(139, 0, 255, 0.05) 75%, 
+      rgba(0, 196, 230, 0.05) 100%
+    );
+    background-size: 200% 200%;
+    animation: holographic-shift 5s linear infinite;
+  }
+
+  @keyframes holographic-shift {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 200% 200%;
+    }
   }
 }

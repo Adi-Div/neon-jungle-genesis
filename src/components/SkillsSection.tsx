@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Section from './Section';
 import Card from './Card';
 import { Progress } from "@/components/ui/progress";
@@ -7,13 +7,9 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { 
   Code, 
-  Database, 
-  Laptop, 
   LayoutGrid, 
-  PenTool, 
-  Server, 
-  Terminal, 
-  Wrench 
+  Wrench, 
+  PenTool
 } from 'lucide-react';
 
 interface Skill {
@@ -68,11 +64,12 @@ const getCategoryIcon = (category: string) => {
     case 'concept':
       return <PenTool className="h-6 w-6 text-jungle-cyan" />;
     default:
-      return <Terminal className="h-6 w-6" />;
+      return null;
   }
 };
 
 const SkillsSection = () => {
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const categories = ['language', 'framework', 'tool', 'concept'] as const;
 
   return (
@@ -92,19 +89,21 @@ const SkillsSection = () => {
               </h3>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {skills
-                .filter((skill) => skill.category === category)
-                .map((skill, index) => (
-                  <Card 
-                    key={index}
-                    className="transform transition-all duration-500 backdrop-blur-xl bg-black/40 border border-white/5 hover:border-white/20"
-                    glowColor={skill.color === 'jungle-cyan' ? 'cyan' : skill.color === 'jungle-violet' ? 'violet' : 'teal'}
-                    hoverEffect={true}
-                    style={{ '--shadow-color': `var(--${skill.color})` } as React.CSSProperties}
-                  >
-                    <div className="p-6 relative z-10">
-                      <div className="flex items-center justify-between mb-4">
+            <Card 
+              glowColor={category === 'language' || category === 'concept' ? 'cyan' : category === 'framework' ? 'violet' : 'teal'}
+              className="p-0"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+                {skills
+                  .filter((skill) => skill.category === category)
+                  .map((skill, index) => (
+                    <div 
+                      key={index}
+                      className="relative transform transition-all duration-500 backdrop-blur-xl bg-black/40 border border-white/5 hover:border-white/20 p-4 rounded-lg hover:shadow-lg"
+                      onMouseEnter={() => setHoveredSkill(skill.name)}
+                      onMouseLeave={() => setHoveredSkill(null)}
+                    >
+                      <div className="flex items-center justify-between mb-3">
                         <h4 className={`text-lg font-semibold text-${skill.color}`}>
                           {skill.name}
                         </h4>
@@ -129,10 +128,34 @@ const SkillsSection = () => {
                           skill.color === 'jungle-emerald' && "[&>div]:bg-[#00B7A8]"
                         )}
                       />
+                      
+                      {/* Particle Effect on Hover */}
+                      {hoveredSkill === skill.name && (
+                        <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-lg">
+                          {[...Array(15)].map((_, i) => (
+                            <div 
+                              key={i}
+                              className="absolute w-1 h-1 rounded-full animate-particle"
+                              style={{
+                                left: `${Math.random() * 100}%`,
+                                top: `${Math.random() * 100}%`,
+                                backgroundColor: skill.color === 'jungle-cyan' 
+                                  ? '#00C4E6' 
+                                  : skill.color === 'jungle-violet' 
+                                    ? '#8B00FF' 
+                                    : '#00B7A8',
+                                animationDelay: `${Math.random() * 2}s`,
+                                animationDuration: `${1 + Math.random() * 2}s`,
+                                opacity: 0.7
+                              }}
+                            />
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  </Card>
-                ))}
-            </div>
+                  ))}
+              </div>
+            </Card>
           </div>
         ))}
       </div>

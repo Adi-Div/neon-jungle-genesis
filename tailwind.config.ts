@@ -67,8 +67,11 @@ export default {
 				jungle: {
 					dark: '#000000',
 					cyan: '#00C4E6',
+					'secondary-cyan': '#66D9FF',
 					violet: '#8B00FF',
+					'secondary-violet': '#9F45FF',
 					emerald: '#00B7A8',
+					'secondary-emerald': '#45E8D9',
 					navy: '#0D1B3E'
 				}
 			},
@@ -117,6 +120,18 @@ export default {
 				'ripple': {
 					'0%': { transform: 'scale(0)', opacity: '1' },
 					'100%': { transform: 'scale(4)', opacity: '0' }
+				},
+				'particle': {
+					'0%': { transform: 'translateY(0) scale(1)', opacity: '0.8' },
+					'100%': { transform: 'translateY(-100px) scale(0)', opacity: '0' }
+				},
+				'glow-pulse': {
+					'0%, 100%': { boxShadow: '0 0 10px 0 rgba(0, 196, 230, 0.3)' },
+					'50%': { boxShadow: '0 0 20px 5px rgba(139, 0, 255, 0.6)' }
+				},
+				'holographic-shift': {
+					'0%': { backgroundPosition: '0% 0%' },
+					'100%': { backgroundPosition: '200% 200%' }
 				}
 			},
 			animation: {
@@ -128,12 +143,26 @@ export default {
 				'rotate-slow': 'rotate-slow 12s linear infinite',
 				'grow-vine': 'grow-vine 2s ease-out forwards',
 				'text-shimmer': 'text-shimmer 3s linear infinite',
-				'ripple': 'ripple 1s ease-out'
+				'ripple': 'ripple 1s ease-out',
+				'particle': 'particle 2s ease-in infinite',
+				'glow-pulse': 'glow-pulse 3s infinite',
+				'holographic-shift': 'holographic-shift 5s linear infinite'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'cyber-grid': 'linear-gradient(rgba(0, 196, 230, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 196, 230, 0.2) 1px, transparent 1px)',
-				'jungle-overlay': 'url("data:image/svg+xml,%3Csvg width=\'100%25\' height=\'100%25\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3Cpattern id=\'smallGrid\' width=\'10\' height=\'10\' patternUnits=\'userSpaceOnUse\'%3E%3Cpath d=\'M 10 0 L 0 0 0 10\' fill=\'none\' stroke=\'rgba(0, 183, 168, 0.2)\' stroke-width=\'0.5\'/%3E%3C/pattern%3E%3Cpattern id=\'grid\' width=\'50\' height=\'50\' patternUnits=\'userSpaceOnUse\'%3E%3Crect width=\'50\' height=\'50\' fill=\'url(%23smallGrid)\'/%3E%3Cpath d=\'M 50 0 L 0 0 0 50\' fill=\'none\' stroke=\'rgba(0, 196, 230, 0.2)\' stroke-width=\'1\'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'url(%23grid)\' /%3E%3C/svg%3E")'
+				'jungle-overlay': 'url("data:image/svg+xml,%3Csvg width=\'100%25\' height=\'100%25\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3Cpattern id=\'smallGrid\' width=\'10\' height=\'10\' patternUnits=\'userSpaceOnUse\'%3E%3Cpath d=\'M 10 0 L 0 0 0 10\' fill=\'none\' stroke=\'rgba(0, 183, 168, 0.2)\' stroke-width=\'0.5\'/%3E%3C/pattern%3E%3Cpattern id=\'grid\' width=\'50\' height=\'50\' patternUnits=\'userSpaceOnUse\'%3E%3Crect width=\'50\' height=\'50\' fill=\'url(%23smallGrid)\'/%3E%3Cpath d=\'M 50 0 L 0 0 0 50\' fill=\'none\' stroke=\'rgba(0, 196, 230, 0.2)\' stroke-width=\'1\'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'url(%23grid)\' /%3E%3C/svg%3E")',
+				'holographic-gradient': 'linear-gradient(45deg, rgba(0, 196, 230, 0.1) 0%, rgba(139, 0, 255, 0.1) 25%, rgba(0, 183, 168, 0.1) 50%, rgba(139, 0, 255, 0.1) 75%, rgba(0, 196, 230, 0.1) 100%)'
+			},
+			boxShadow: {
+				'neon-cyan': '0 0 10px 2px rgba(0, 196, 230, 0.5)',
+				'neon-violet': '0 0 10px 2px rgba(139, 0, 255, 0.5)',
+				'neon-teal': '0 0 10px 2px rgba(0, 183, 168, 0.5)',
+				'neon-double': '0 0 10px rgba(0, 196, 230, 0.5), 0 0 20px rgba(139, 0, 255, 0.3)'
+			},
+			transitionProperty: {
+				'glow': 'box-shadow, text-shadow',
+				'filter': 'filter'
 			}
 		}
 	},

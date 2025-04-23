@@ -13,6 +13,7 @@ interface SectionProps {
 const Section = ({ id, className, children, title, subtitle }: SectionProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -29,10 +30,18 @@ const Section = ({ id, className, children, title, subtitle }: SectionProps) => 
       observer.observe(sectionRef.current);
     }
 
+    // Parallax effect on scroll
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -41,12 +50,36 @@ const Section = ({ id, className, children, title, subtitle }: SectionProps) => 
       id={id}
       ref={sectionRef}
       className={cn(
-        'py-20 min-h-screen flex flex-col justify-center relative',
+        'py-16 md:py-32 min-h-screen flex flex-col justify-center relative',
         className
       )}
     >
-      {/* Section background pattern */}
-      <div className="absolute inset-0 bg-jungle-overlay opacity-10 pointer-events-none"></div>
+      {/* Parallax background layers */}
+      <div 
+        className="absolute inset-0 bg-jungle-overlay opacity-10 pointer-events-none"
+        style={{ transform: `translateY(${scrollY * 0.2}px)` }}
+      ></div>
+      
+      <div 
+        className="absolute inset-0 overflow-hidden pointer-events-none"
+        style={{ transform: `translateY(${scrollY * 0.1}px)` }}
+      >
+        {/* Firefly particles */}
+        {[...Array(50)].map((_, i) => (
+          <div 
+            key={i}
+            className="absolute w-1.5 h-1.5 rounded-full bg-jungle-cyan/50 animate-floating"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${3 + Math.random() * 6}s`,
+              opacity: 0.3 + Math.random() * 0.5,
+              transform: `scale(${0.5 + Math.random() * 0.5})`
+            }}
+          />
+        ))}
+      </div>
       
       {/* Digital vines */}
       <div 
@@ -64,7 +97,7 @@ const Section = ({ id, className, children, title, subtitle }: SectionProps) => 
         style={{ "--index": "2" } as React.CSSProperties}
       ></div>
 
-      <div className="container mx-auto px-4 z-10">
+      <div className="container mx-auto px-6 md:px-8 z-10">
         {(title || subtitle) && (
           <div className={cn(
             "mb-16 transform transition-all duration-1000 ease-out",
